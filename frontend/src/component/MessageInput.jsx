@@ -70,14 +70,25 @@ function MessageInput() {
 
       {/* Message Input Form */}
       <form onSubmit={handleSendMessage} className="flex items-center gap-2">
-        <div className="flex-1 flex gap-2">
+        <div className="flex-1 flex items-center relative">
+          {/* Message Input */}
           <input
             type="text"
-            className="w-full border rounded-lg text-sm py-2 px-3 sm:text-base sm:py-3 sm:px-4"
+            className="w-full border rounded-lg text-sm py-1.5 px-3 sm:text-base sm:py-2 sm:px-4 md:text-lg md:py-3 md:px-6 pr-14"
             placeholder="Type a message"
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
+
+          {/* Image Upload Button */}
+          <button
+            type="button"
+            className={`absolute right-0 top-1/2 transform -translate-y-1/2 flex items-center justify-center w-10 h-10 rounded-full ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <Image />
+          </button>
+
           {/* Hidden file input */}
           <input
             type="file"
@@ -86,18 +97,9 @@ function MessageInput() {
             ref={fileInputRef}
             onChange={handleImageChange}
           />
-          
-          {/* Image Upload Button */}
-          <button
-            type="button"
-            className={`flex items-center justify-center w-12 h-12 rounded-full ${imagePreview ? "text-emerald-500" : "text-zinc-400"}`}
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <Image />
-          </button>
         </div>
 
-        {/* Send Button */}
+        {/* Send Button (outside input field) */}
         <button
           type="submit"
           className="w-10 h-10 rounded-full text-center flex items-center justify-center sm:ml-2"

@@ -16,7 +16,7 @@ className=" border-b border-gray-300 fixed w-full top-0 z-40 backdrop-blur-lg bg
     <div className="size-9 rounded-lg bg-blue-500  flex items-center justify-center">
         <MessageSquare  className="w-5 h-5 text-blue-900"/>
     </div>
-    <h1 className="text-lg font-bold">റഹസ്യമുറി</h1>
+    <h1 className="text-lg font-bold">രഹസ്യ മുറി</h1>
     </Link>
         </div>
         <div className="flex items-center gap-2">
