@@ -36,13 +36,13 @@ function ChatContainer() {
   );
 
   const handleImageClick = (imageUrl) => {
-    setModalImage(imageUrl); // Set the clicked image URL
-    setIsModalOpen(true); // Open the modal
+    setModalImage(imageUrl); 
+    setIsModalOpen(true); 
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false); // Close the modal
-    setModalImage(""); // Clear the image
+    setIsModalOpen(false); 
+    setModalImage("");
   };
 
 

@@ -56,6 +56,7 @@ try {
     await axiosInstens.post('/auth/logout')
     set({authUser:null})
     toast.success('logged out successfully')
+    window.location.href = '/login';
     get().disconnectSoket()
 } catch (error) {
     toast.error(error.response.data.message)
@@ -102,8 +103,6 @@ try {
             });
         }
     },
-    
-    
     disconnectSoket: () => {
         const socket = get().socket;
         if (socket && socket.connected) {
@@ -111,5 +110,4 @@ try {
             set({socket: null});
         }
     }
-    
 }))

@@ -21,7 +21,6 @@ function ChatHeader() {
             </div>
           </div>
 
-          {/* User Info (name and online/offline status) */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:ml-4">
             <h3 className="font-medium text-base">{selectedUsers.fullName}</h3>
             <p className="text-sm text-base-content/70 sm:ml-2">

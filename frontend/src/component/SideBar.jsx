@@ -1,49 +1,47 @@
-import { useEffect, useState } from "react"
-import { useChatStore } from "../store/useChatStore"
-import SlidebarSkelton from "./skeltons/SlidebarSkelton"
-import { User } from "lucide-react"
-import { useAuthStore } from "../store/useAuthStore"
+import { useEffect, useState } from "react";
+import { useChatStore } from "../store/useChatStore";
+import SlidebarSkelton from "./skeltons/SlidebarSkelton";
+import { User, Search } from "lucide-react";  // Import the Search icon
+import { useAuthStore } from "../store/useAuthStore";
 
 function SideBar() {
-    const { getUsers, users, selectedUsers, setSelectUser, isUsersLoding } = useChatStore()
-    const [showOnlineOnly, setShowOnlineOnly] = useState(false)
-    const [searchQuery, setSearchQuery] = useState("") // State for search query
-    const { onlineUsers } = useAuthStore()
+    const { getUsers, users, selectedUsers, setSelectUser, isUsersLoding } = useChatStore();
+    const [showOnlineOnly, setShowOnlineOnly] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(""); // State for search query
+    const { onlineUsers } = useAuthStore();
 
     useEffect(() => {
-        getUsers()
-    }, [getUsers])
+        getUsers();
+    }, [getUsers]);
 
-    if (isUsersLoding) return <SlidebarSkelton />
+    if (isUsersLoding) return <SlidebarSkelton />;
 
-  
-    const filteruser = users.filter(user => 
+    const filteruser = users.filter(user =>
         user.fullName.toLowerCase().includes(searchQuery.toLowerCase())
-    )
+    );
 
-    const finalFilteredUsers = showOnlineOnly ? filteruser.filter(user => onlineUsers.includes(user._id)) : filteruser
+    const finalFilteredUsers = showOnlineOnly ? filteruser.filter(user => onlineUsers.includes(user._id)) : filteruser;
 
     return (
         <aside className="h-full w-full lg:w-72 border-r border-gray-300 flex flex-col transition-all duration-200">
-        
             <div className="border-b border-gray-300 w-full p-5">
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                     <User className="size-6" />
                     <span className="font-medium">Contacts</span>
-                </div>
+                </div> */}
+                 <User className="size-6" />
 
-                {/* Search Bar */}
-                <div className="mt-3">
+                <div className="mt-3 relative">
                     <input
                         type="text"
                         placeholder="Search users..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-md"
+                        className="w-full p-1 pl-10 pr-3 border border-gray-300 rounded-2xl"
                     />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" size={15} /> {/* Search Icon inside input */}
                 </div>
 
-                {/* Online Only Filter */}
                 <div className="mt-3 flex items-center gap-2">
                     <label className="cursor-pointer flex items-center gap-2">
                         <input
@@ -58,7 +56,6 @@ function SideBar() {
                 </div>
             </div>
 
-            {/* User List Section */}
             <div className="overflow-y-auto w-full py-3">
                 {finalFilteredUsers.map((user) => (
                     <button
@@ -70,7 +67,6 @@ function SideBar() {
                             ${selectedUsers?._id === user._id ? "bg-gray-300 ring-1 ring-gray-300" : ""}
                         `}
                     >
-                        {/* Profile Image and Name - Aligned to the Left */}
                         <div className="flex items-center gap-3">
                             <div className="relative">
                                 <img
@@ -85,8 +81,7 @@ function SideBar() {
                                     />
                                 )}
                             </div>
-                            
-                            {/* Name and Status */}
+
                             <div className="text-left min-w-0">
                                 <div className="font-medium truncate">{user.fullName}</div>
                                 <div className="text-sm text-zinc-400">
@@ -102,7 +97,7 @@ function SideBar() {
                 )}
             </div>
         </aside>
-    )
+    );
 }
 
-export default SideBar
+export default SideBar;
